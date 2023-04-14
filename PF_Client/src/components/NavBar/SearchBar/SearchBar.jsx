@@ -34,15 +34,17 @@ export const SearchBar = () => {
     e.preventDefault();
     setSearch(e.target.value.toLowerCase());
   };
+  //capturo el endpoint
+  let direccionActual = window.location.href;
+  let endpoint = direccionActual.slice(-4)
 
   // Hacer la búsqueda de productos por nombre con el botón search
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.href === 'http://localhost:3000/home' ? ''
-    : navigate('/home')
+    endpoint === 'home' ? '' : navigate('/home')
     dispatch(searchProductByName(search));
     setSearch('');
-    // setCurrentPage(1);
+    // setCurrentPage(1)
   };
 
   // Actualizar el número de resultados encontrados
@@ -52,8 +54,7 @@ export const SearchBar = () => {
 
   // Hacer la búsqueda de productos por nombre con la lista de resultados
   const handleItemSelected = (item) => {  
-    window.location.href === 'http://localhost:3000/home' ? ''
-    : navigate('/home')
+    endpoint === 'home' ? '' : navigate('/home') ? '' : navigate('/home')
     setSearch(item)
     dispatch(searchProductByName(item))
     setSearch('');

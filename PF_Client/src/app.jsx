@@ -19,8 +19,6 @@ import { MercadoPago } from './views/Checkout/MercadoPago'
 
 const backend =import.meta.env.VITE_BACKEND_URL;
 axios.defaults.baseURL = backend
-//axios.defaults.baseURL = 'http://localhost:3001/';
-
 
 function App() {
   const location = useLocation();
