@@ -37,6 +37,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: "All"
       },
+      score: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+      },
       category: {
         type: DataTypes.ENUM(
           "Blusas",
@@ -57,8 +61,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: true,
-      updatedAt: false,
+      paranoid: true,
     }
   );
 };

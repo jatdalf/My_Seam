@@ -13,24 +13,44 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM("Arreglo de ropa", "Confección de ropa", "Bordado", "Decoración de ropa", "Todos"),
         allowNull: false,
-        unique: true,
+        defaultValue: "Todos"
+      },
+       price: {
+       type: DataTypes.ENUM("A convenir", "Negociable"),
+       allowNull: false,
       },
       description: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      price: {
-        type: DataTypes.DOUBLE,
+      number: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      country: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       image: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-      }
+      },
+      score: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+      },
     },
     {
-      timestamps: false,
+      paranoid: true,
     }
   );
 };
