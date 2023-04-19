@@ -28,13 +28,11 @@ export const Home = () => {
   
   } else {
     return (
-      <div id="home">
+      <div>
         <NavBar isAuthenticated={isAuthenticated} user={user} />
         <Carousel />
         <Sections />
-        <div id="card">
-          <Card />
-        </div>
+        <Card />
         <BotonIrInicio />
         <Footer />
       </div>

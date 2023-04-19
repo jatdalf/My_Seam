@@ -31,15 +31,14 @@ module.exports = (sequelize) => {
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          min: 0,
+        },
       },
       gender: {
         type: DataTypes.ENUM("Mujer", "Hombre", "Niño", "Niña", "All"),
         allowNull: false,
         defaultValue: "All"
-      },
-      score: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
       },
       category: {
         type: DataTypes.ENUM(

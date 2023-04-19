@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { json, useNavigate  } from 'react-router-dom';
+import { NavLink, json, useNavigate  } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './SearchBar.module.css';
 import { searchProductByName, getProductById } from '../../../redux/actions';
@@ -29,22 +29,23 @@ export const SearchBar = () => {
   const allProducts = useSelector((state) => state.allProducts);
   const products = useSelector((state) => state.products);
 
+  //capturo el endpoint
+  let direccionActual = window.location.href;
+  let endpoint = direccionActual.slice(-4)
+
   // Actualizar el estado de la búsqueda 
   const handleChange = (e) => {
     e.preventDefault();
     setSearch(e.target.value.toLowerCase());
   };
-  //capturo el endpoint
-  let direccionActual = window.location.href;
-  let endpoint = direccionActual.slice(-4)
 
   // Hacer la búsqueda de productos por nombre con el botón search
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault();    
     endpoint === 'home' ? '' : navigate('/home')
     dispatch(searchProductByName(search));
     setSearch('');
-    // setCurrentPage(1)
+    // setCurrentPage(1);
   };
 
   // Actualizar el número de resultados encontrados
@@ -54,7 +55,7 @@ export const SearchBar = () => {
 
   // Hacer la búsqueda de productos por nombre con la lista de resultados
   const handleItemSelected = (item) => {  
-    endpoint === 'home' ? '' : navigate('/home') ? '' : navigate('/home')
+    endpoint === 'home' ? '' : navigate('/home')
     setSearch(item)
     dispatch(searchProductByName(item))
     setSearch('');
@@ -64,9 +65,8 @@ export const SearchBar = () => {
     <div>
       <form className={`${styles.containerSerchBar} d-flex`} role="search" onSubmit={handleSubmit}>
         {/* Input search & Button Search */}
-        <Input className={styles.inputSearch} mr={3} width='250px' placeholder='Buscar productos...' onChange={(e) => handleChange(e)} value={search} type="search" />
-        {/* <a href="#card"><IconButton className={styles.buttonSearch} mr={3} rounded="full" icon={<SearchIcon />} isDisabled={disabled} onClick={handleSubmit} /></a> */}
-        <Link to="#card">
+        <Input className={styles.inputSearch} mr={3} width='240px' placeholder='Buscar productos...' onChange={(e) => handleChange(e)} value={search} type="search" />
+        <Link to="#categories">
           <IconButton
           className={styles.buttonSearch}
           mr={3}
@@ -82,16 +82,18 @@ export const SearchBar = () => {
       <div className={styles.conatinerResults}>
         {/* Quantity Results */}
         { search.length > 0 && <div className={styles.quantityResults}>{results.length > 5 ? 5 : results.length} results </div>}
+        
         {/* Search results */}
         {allProducts &&
-        <Link to="#card"><Results 
+        <a href="#categories"><Results 
          allProducts={allProducts} 
          onItemSelected={handleItemSelected} 
          search={search} 
          onResultsCalculated={handleResults}
-        /></Link>
-    }
-</div>
+        />
+        </a>
+        }
+      </div>
     </div>
   )
 }

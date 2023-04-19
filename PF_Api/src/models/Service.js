@@ -43,11 +43,7 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-      },
-      score: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
-      },
+      }
     },
     {
       paranoid: true,

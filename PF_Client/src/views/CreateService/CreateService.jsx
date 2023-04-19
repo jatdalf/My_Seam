@@ -24,12 +24,8 @@ import axios from "axios";
 export const CreateService = () => {
 
    const [showAlert, setShowAlert] = useState(false);
-
    const [camposVacios, setCamposVacios] = useState(false);
-
-
    const [error, setError] = useState({});
-   
    const [form, setForm] = useState({
     name: "",
     price: "",

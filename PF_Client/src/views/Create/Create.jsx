@@ -29,13 +29,9 @@ const CDNURL =
 
 export const Create = ({ isAuthenticated, user }) => {
   const userInfo = useSelector((state) => state.userInfo);
- 
   const [showAlert, setShowAlert] = useState(false);
-
   const [camposVacios, setCamposVacios] = useState(false);
-
   const [error, setError] = useState({});
-
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -48,7 +44,6 @@ export const Create = ({ isAuthenticated, user }) => {
   });
 
   const [image, setImage] = useState({});
-
   const [send, setSend] = useState({});
   const changeHandler = (event) => {
     const property = event.target.name;
