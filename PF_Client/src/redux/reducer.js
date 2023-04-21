@@ -3,7 +3,7 @@ import {GET_PRODUCTS,
     SEARCH_PRODUCT_BY_NAME,
     GET_PROMOTIONS,
     GET_PRODUCT_QUESTION,
-  GET_SERVICE_QUESTION,
+    GET_SERVICE_QUESTION,
     ORDER_BY_ALPHABET,
     GET_PRODUCT_BY_ID,
     FILTER_BY_PRICE,
@@ -22,7 +22,10 @@ import {GET_PRODUCTS,
     DELETE_CART,
     UPDATE_CART,
     UPDATE_CART_SET,
-   nameAlphabet } from "./actions";
+    nameAlphabet,
+    GET_REVIEW,
+    GET_REVIEWS_BY_KIND,
+    POST_REVIEW } from "./actions";
 
 const initialState = {
 products: [],
@@ -39,7 +42,8 @@ users: [],
 userInfo: {},
 user: {},
 favourites: [],
-cartLength: 0
+cartLength: 0,
+review: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -110,8 +114,8 @@ const rootReducer = (state = initialState, action) => {
             if (action.min < 1 && action.max < 1 || action.min > action.max) {
                 alert('No hay productos con ese rango de precios')
                  filterRange = state.products
-            } else if(action.min === action.max) {
-                filterRange = productsByRange.filter( p => p.price === action.max)
+            } else if (action.min === action.max) {
+                filterRange = productsByRange.filter(p => p.price == action.min)
                 if (filterRange.length === 0) {
                     filterRange = state.products 
                     alert('No hay productos con ese rango de precios') 
@@ -238,6 +242,21 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                  cartLength: action.payload
             }
+    case GET_REVIEW:
+        return {
+            ...state,
+            reviews: action.payload
+        }
+    case GET_REVIEWS_BY_KIND:
+        return {
+            ...state,
+            reviews: action.payload
+        }
+    case POST_REVIEW:
+        return {
+            ...state,
+            reviews: action.payload,
+        }
 
     default:
       return { ...state };

@@ -9,7 +9,7 @@ import { useColorMode, Icon, Alert, AlertIcon } from '@chakra-ui/react'
 import { BsFillCartPlusFill, BsFillHeartFill } from "react-icons/bs";
 import StarRank from "../../StarRank/StarRank.jsx"
 
-export const CardProducts = ({ id, image, name, price, description }) => {
+export const CardProducts = ({ id, image, name, price, description, score }) => {
   // Cambiar , id, image, name, price, d tema entre oscuro/claro 
   const { toggleColorMode, colorMode } = useColorMode();  
   const currentTheme = useColorMode().colorMode
@@ -147,7 +147,7 @@ export const CardProducts = ({ id, image, name, price, description }) => {
           <Link className={styles.Link} to= {`/ProductDetail/${id}`}>
             {/* Elementos de la card */}
             <img className={styles.imgCenter} src={image[0]} alt={name} width='200px' height='210px' title="Haz clic para ver más detalles" />
-            <StarRank />
+            <StarRank props={score} />
           </Link>
           <Icon as={BsFillCartPlusFill} w={8} h={8} className={styles.buttonCart} onClick={handleCart} title="Agregar al carrito"/>
           <Icon as={BsFillHeartFill} color={indexProduct >= 0  ? 'red' : ''} w={8} h={8} className={indexProduct >= 0  ? styles.favItem : styles.buttonFavourites} onClick={handleFavourites} title="Agregar a favoritos"/>

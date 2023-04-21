@@ -24,6 +24,9 @@ export const POST_CART = "POST_CART";
 export const DELETE_CART = "DELETE_CART";
 export const UPDATE_CART= "UPDATE_CART";
 export const UPDATE_CART_SET = "UPDATE_CART_SET";
+export const GET_REVIEW = "GET_REVIEW"
+export const GET_REVIEWS_BY_KIND = "GET_REVIEWS_BY_KIND"
+export const POST_REVIEW = "POST_REVIEW"
 
 export const getUsers = () => {
   return async function (dispatch) {
@@ -222,7 +225,33 @@ export const update_cart = (value) => ({
   type: UPDATE_CART,
   payload: value,
 });
+
 export const update_cart_set = (value)=>({
   type: UPDATE_CART_SET,
   payload: value,
 });
+
+export function getReview(id) {
+  return async function (dispatch) {
+    const review = await axios.get(`/review/${id}`);
+    const reviewData = review.data;
+    dispatch({ type: GET_REVIEW, payload: reviewData });
+  };
+}
+
+export function getReviewByKind(kind) { //pasar por param si es tipo (kind) Product o Service
+  return async function (dispatch) {
+    const review = await axios.get(`/review?kind=${kind}`);
+    const reviewData = review.data;
+    dispatch({ type: GET_REVIEWS_BY_KIND, payload: reviewData });
+  };
+}
+
+export const postReview = (Body)=>{
+  return async function(dispatch){
+      console.log(Body);
+      const newReview = await axios.post(`/review`, Body);
+      const review = newReview.data
+      dispatch({type: POST_ACTIVITY, payload: review});
+  };
+};
