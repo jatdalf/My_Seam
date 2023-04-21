@@ -47,7 +47,7 @@ export const NavBar = () => {
     <div className={styles.mainContainer}>
     {/* NavBar */}
     <nav
-      className="navbar navbar-expand-xl bg-body-tertiary"
+      className="navbar navbar-expand-xl bg-body-tertiary fixed-top"
       data-bs-theme={currentTheme === "dark" ? "dark" : "light"}
     >
     <div className="container-fluid">
