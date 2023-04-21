@@ -18,7 +18,8 @@ export const MercadoPago = () => {
 
   const items = cart?.map(el => {
       return {
-        id: el.id,
+        //id: el.id,
+        id: 6,
         name: el.name,
         unit_price: el.price,
         quantity: el.quantity,

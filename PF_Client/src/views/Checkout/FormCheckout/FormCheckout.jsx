@@ -30,7 +30,7 @@
   
             {/* Input codigo_postal */}
             <div className="col-md-2">
-              <label className="form-label">CP:</label>
+              <label className="form-label">Cod.Postal:</label>
               <input 
                 type="number" 
                 className={err.cp || !input.cp ? "form-control is-invalid" : "form-control is-valid"} 
@@ -61,7 +61,7 @@
 
              {/* Input colonia */}
             <div className="col-md-4">
-              <label className="form-label">Colonia:</label>
+              <label className="form-label">Colonia/Barrio:</label>
               <input 
                 className={err.colonia || !input.colonia ? "form-control is-invalid" : "form-control is-valid"}  
                 value={input.colonia} 
