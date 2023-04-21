@@ -25,8 +25,8 @@ export const NavBar = () => {
   const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
+    isAuthenticated &&
     dispatch(getUserByEmail(user?.email));
-    // dispatch(getProductById(id));
   }, [dispatch]);
 
   // Estado para mostar elementos de acuerdo al max-width de la pantalla
@@ -47,7 +47,7 @@ export const NavBar = () => {
     <div className={styles.mainContainer}>
     {/* NavBar */}
     <nav
-      className="navbar navbar-expand-xl bg-body-tertiary fixed-top"
+      className="navbar navbar-expand-xl bg-body-tertiary"
       data-bs-theme={currentTheme === "dark" ? "dark" : "light"}
     >
     <div className="container-fluid">
