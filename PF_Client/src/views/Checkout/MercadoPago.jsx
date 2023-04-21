@@ -22,7 +22,7 @@ export const MercadoPago = () => {
         name: el.name,
         unit_price: el.price,
         quantity: el.quantity,
-        userid: el.userid
+        userid: 6
       }
     })
   const seller_id = items[0].userid;
