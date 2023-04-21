@@ -3,7 +3,7 @@ import {GET_PRODUCTS,
     SEARCH_PRODUCT_BY_NAME,
     GET_PROMOTIONS,
     GET_PRODUCT_QUESTION,
-    GET_SERVICE_QUESTION,
+  GET_SERVICE_QUESTION,
     ORDER_BY_ALPHABET,
     GET_PRODUCT_BY_ID,
     FILTER_BY_PRICE,
@@ -22,10 +22,8 @@ import {GET_PRODUCTS,
     DELETE_CART,
     UPDATE_CART,
     UPDATE_CART_SET,
-    nameAlphabet,
-    GET_REVIEW,
-    GET_REVIEWS_BY_KIND,
-    POST_REVIEW } from "./actions";
+    UPDATE_FAVOURITES,
+   nameAlphabet } from "./actions";
 
 const initialState = {
 products: [],
@@ -42,8 +40,8 @@ users: [],
 userInfo: {},
 user: {},
 favourites: [],
-cartLength: 0,
-review: []
+allFavourites: 0,
+cartLength: 0
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -242,21 +240,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                  cartLength: action.payload
             }
-    case GET_REVIEW:
-        return {
-            ...state,
-            reviews: action.payload
-        }
-    case GET_REVIEWS_BY_KIND:
-        return {
-            ...state,
-            reviews: action.payload
-        }
-    case POST_REVIEW:
-        return {
-            ...state,
-            reviews: action.payload,
-        }
+    case UPDATE_FAVOURITES:
+            return{
+                ...state,
+                allFavourites: action.payload
+            }
 
     default:
       return { ...state };

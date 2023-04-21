@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './CardProducts.module.css';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getProducts, postCart, getUserByEmail, update_cart } from '../../../redux/actions';
+import { getProducts, postCart, getUserByEmail, update_cart, updateFavourites } from '../../../redux/actions';
 //Chakra
 import { useColorMode, Icon, Alert, AlertIcon } from '@chakra-ui/react'
 import { BsFillCartPlusFill, BsFillHeartFill } from "react-icons/bs";
 import StarRank from "../../StarRank/StarRank.jsx"
 
-export const CardProducts = ({ id, image, name, price, description, score }) => {
+export const CardProducts = ({ id, image, name, price, description }) => {
   // Cambiar , id, image, name, price, d tema entre oscuro/claro 
   const { toggleColorMode, colorMode } = useColorMode();  
   const currentTheme = useColorMode().colorMode
@@ -27,7 +27,6 @@ export const CardProducts = ({ id, image, name, price, description, score }) => 
   const cart = useSelector(state => state.cart)
   const favourites = useSelector(state => state.favourites)
   const userInfo = useSelector(state => state.userInfo)  
-  
   
   // Buscar si el producto esta en favoritos
   const favProduct = allProducts.find(el => el.id == id)
@@ -56,47 +55,23 @@ export const CardProducts = ({ id, image, name, price, description, score }) => 
     // Validar si ya existe el producto en el carrito de compras
     if (cart.find(el => el === cartProduct)) {   
       cartProduct.quantity +=  1 
-      let add=1;
+      let add = 1;
       dispatch(update_cart(add));
     } else {
         cartProduct.quantity = 1 
-        let add=1;
+        let add = 1;
         cart.push(cartProduct);
         dispatch(update_cart(add));   
       }
-    localStorage.setItem("cart", JSON.stringify(cart))       
+
+    // localStorage.setItem("cartStorage", JSON.stringify(cart))
     showNotify();
   }
-  // const handleCart =  () => {
-  //   const newProductCart = allProducts.find(el => el.id == id)
-  //   // Validar si ya existe el producto en el carrito de compras
-  //   if (cart.find(el => el === newProductCart)) {  
-  //     newProductCart.quantity +=  1 
-      // dispatch(postCart({
-      //   customer_id: userInfo.id,
-      //   prods: [
-      //     {
-      //       productid: newProductCart.id,
-      //       quantity:  newProductCart.quantity +=  1
-      //     }
-      //   ]
-      // }))
-    // } else {
-    //     newProductCart.quantity = 1 
-    //     cart.push(newProductCart)   
-        // dispatch(postCart({
-        //   customer_id: userInfo.id,
-        //   prods: [
-        //     {
-        //       productid: newProductCart.id,
-        //       quantity:  1
-        //     }
-        //   ]
-        // }))
-  //     }
-  //   localStorage.setItem("cart", JSON.stringify(cart))       
-  //   showNotify();
-  // }
+
+  // useEffect(() => {
+  //   localStorage.setItem("cartStorage", JSON.stringify(cart))
+  // }, [cart])
+
 
   // Agregar producto a favoritos
   const handleFavourites =  () => { 
@@ -105,10 +80,11 @@ export const CardProducts = ({ id, image, name, price, description, score }) => 
       if (indexProduct >= 0) {   
         favourites.splice(indexProduct, 1)
         showNotifyDeleteFav()
+        let add = 1
+        dispatch(updateFavourites(add))
       } else {
-        favourites.push(favProduct)   
+        favourites.push(favProduct)  
         showNotifyFav()
-        dispatch(getProducts())
         }
     } else {
       loginWithRedirect()
@@ -147,7 +123,7 @@ export const CardProducts = ({ id, image, name, price, description, score }) => 
           <Link className={styles.Link} to= {`/ProductDetail/${id}`}>
             {/* Elementos de la card */}
             <img className={styles.imgCenter} src={image[0]} alt={name} width='200px' height='210px' title="Haz clic para ver más detalles" />
-            <StarRank props={score} />
+            <StarRank />
           </Link>
           <Icon as={BsFillCartPlusFill} w={8} h={8} className={styles.buttonCart} onClick={handleCart} title="Agregar al carrito"/>
           <Icon as={BsFillHeartFill} color={indexProduct >= 0  ? 'red' : ''} w={8} h={8} className={indexProduct >= 0  ? styles.favItem : styles.buttonFavourites} onClick={handleFavourites} title="Agregar a favoritos"/>

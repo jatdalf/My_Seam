@@ -3,8 +3,7 @@ import { BsStar, BsStarFill } from "react-icons/bs";
 import styles from "../StarRank/StarRank.module.css"
 
 const StarRank = (props)=>{
-  console.log(props);
-  const score = props;
+  const score = 0;
 
   return(
     <div className={styles.stars}>
