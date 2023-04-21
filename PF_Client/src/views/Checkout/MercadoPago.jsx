@@ -22,8 +22,7 @@ export const MercadoPago = () => {
         name: el.name,
         unit_price: el.price,
         quantity: el.quantity,
-        //userid: el.userid
-        userid: 6
+        userid: el.userid
       }
     })
   const seller_id = items[0].userid;
@@ -34,7 +33,7 @@ export const MercadoPago = () => {
       seller_id: seller_id
     })
       .then(response => {
-        setPreferenceId(response.data.global);
+        window.location.href = response.data.global.init_point;
       })
       .catch(error => {
         console.error(error);
@@ -58,7 +57,6 @@ export const MercadoPago = () => {
         <main>
           {renderSpinner()}
           <Checkout onClick={handleClick} description cart={cart}/>
-          <Payment />
         </main>
       </InternalProvider>
     </div>
