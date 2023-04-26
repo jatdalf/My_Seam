@@ -147,7 +147,7 @@ const rootReducer = (state = initialState, action) => {
             let filterCategory = [];
             if (category === "All") {
                 filterCategory = productCategory
-            } else {
+            } else {                
                 filterCategory = productCategory.filter((p) => p.category === category)
                 if (filterCategory.length === 0) {
                     filterCategory = state.products 
@@ -250,7 +250,7 @@ const rootReducer = (state = initialState, action) => {
         accumulator + currentValue.quantity, 0)
             return{
                 ...state,
-                cartLength: cartLength 
+                cartLength: cartLength ,
             }
     case UPDATE_CART_SET:
             return{

@@ -22,7 +22,7 @@ export const MercadoPago = () => {
         name: el.name,
         unit_price: el.price,
         quantity: el.quantity,
-        userid: 6
+        userid: el.userid
       }
     })
   const seller_id = items[0].userid;
@@ -30,7 +30,7 @@ export const MercadoPago = () => {
     setIsLoading(true);  
     axios.post('/payment', {
       items: items,
-      seller_id: seller_id
+      seller_id: seller_id,
     })
       .then(response => {
         window.location.href = response.data.global.init_point;

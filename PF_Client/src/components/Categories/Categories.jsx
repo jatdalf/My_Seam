@@ -49,19 +49,25 @@ export const Categories = () => {
     const category = e.target.value;
     dispatch(filterByCategory(category));
     setCurrentPage(1)
+    setCategory(e.target.value)
+    const categories = document.getElementById('categories');
+    categories.scrollIntoView({ behavior: 'smooth' });
 };
 
   const handleFilterByGender = (e) => {
     const gender = e.target.value;
     dispatch(filterByGender(gender));
     setCurrentPage(1)
+    setCategory(e.target.value)
+    const categories = document.getElementById('categories');
+    categories.scrollIntoView({ behavior: 'smooth' });
 };
 
   // Mostrar todos los productos
   const handleAll = (e) => {
     e.preventDefault();
     dispatch(getProducts())
-    setCategory(e.target.value)
+    setCategory(currentProducts.length)
     setCurrentPage(1)
   }
 
@@ -78,6 +84,7 @@ export const Categories = () => {
     dispatch(filterByRange(currentPriceMin, currentPriceMax)) 
     setCurrentPriceMin('')
     setCurrentPriceMax('')
+    setCategory(currentProducts.length)
     setCurrentPage(1)
   }
 
@@ -96,8 +103,8 @@ export const Categories = () => {
                     
           <h4>Precio</h4>
           <Button value='Hasta $50' onClick={(e) => handleFilterByPrice(e)} className={styles.buttonCategorie} colorScheme='orange'>Hasta $50</Button>
-          <Button value='$50 a $100' onClick={(e) => handleFilterByPrice(e)} className={styles.buttonCategorie} colorScheme='orange'>Entre $50-$100</Button>
-          <Button value='Mas de $100' onClick={(e) => handleFilterByPrice(e)} className={styles.buttonCategorie} colorScheme='orange'>Más de $100</Button> 
+          <Button value='$50 a $100' onClick={(e) => handleFilterByPrice(e)} className={styles.buttonCategorie} colorScheme='orange'> $50 a $100</Button>
+          <Button value='Mas de $100' onClick={(e) => handleFilterByPrice(e)} className={styles.buttonCategorie} colorScheme='orange'>Más $100</Button> 
           
           <div>
             <Input variant='unstyled' className={styles.inputPrice1} size='xs' placeholder='Mínimo' value={currentPriceMin} onChange={(e) => handleChangePriceMin(e)}></Input>
@@ -112,14 +119,16 @@ export const Categories = () => {
           <Button value='Faldas' onClick={(e) => handleFilterByCategory(e)} className={styles.buttonCategorie} colorScheme='orange'>Faldas</Button>
           <Button value='Pantalones' onClick={(e) => handleFilterByCategory(e)} className={styles.buttonCategorie} colorScheme='orange'>Pantalones</Button>
           <Button value='Camisas' onClick={(e) => handleFilterByCategory(e)} className={styles.buttonCategorie} colorScheme='orange'>Camisas</Button>
-          <Button value='Sueters' onClick={(e) => handleFilterByCategory(e)} className={styles.buttonCategorie} colorScheme='orange'>Sueters</Button>
-          
+          <Button value='Sweaters' onClick={(e) => handleFilterByCategory(e)} className={styles.buttonCategorie} colorScheme='orange'>Sueters</Button>
+          <Button value='Bermudas' onClick={(e) => handleFilterByCategory(e)} className={styles.buttonCategorie} colorScheme='orange'>Bermudas</Button>
+          <Button value='Camperas' onClick={(e) => handleFilterByCategory(e)} className={styles.buttonCategorie} colorScheme='orange'>Camperas</Button>
+
           <h4>Género</h4>
           <Button value='Todos' onClick={(e) => handleAll(e)} className={styles.buttonCategorie} colorScheme='orange'>Todos</Button>
-          <Button value='Masculino' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Masculino</Button>
-          <Button value='Femenino' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Femenino</Button>
-          <Button value='Nino' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Niño</Button>
-          <Button value='Nina' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Niña</Button>
+          <Button value='Hombre' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Hombre</Button>
+          <Button value='Mujer' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Mujer</Button>
+          <Button value='Niño' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Niño</Button>
+          <Button value='Niña' onClick={(e) => handleFilterByGender(e)} className={styles.buttonCategorie} colorScheme='orange'>Niña</Button>
         </div>
 
         {/* Cards */}
